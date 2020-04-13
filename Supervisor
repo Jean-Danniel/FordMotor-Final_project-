@@ -1,0 +1,39 @@
+public class Supervisor extends Manager{
+  //Sales of the company
+  private int CompSales = 0;
+  //Products sold by the company
+  private int soldProd = 0;
+  private int TotalProd = 0;
+  //Supplies of the company
+  private int supplies = 50;
+  private final int PriceperProd = 300;
+  
+  public Supervisor(String NAME, int AGE, int ID, double WAGE, int HOURS, int DAYS){
+  super(NAME,AGE,ID,WAGE,HOURS,DAYS);
+  }
+  
+  public int getCompSales(){
+    return CompSales;
+  }
+  
+  public int getSoldProd(){
+    return soldProd;
+  }
+  
+  //Buying supplies for the corporation
+  public int buy(int SuppToBuy){
+    supplies += SuppToBuy;
+    sales = sales - (PriceperProd * SuppToBuy)
+    return supplies;
+  }
+  
+  //Selling of products made by the compnay, selling will add to sales, and soldProd and subtract from TotalProd
+  public int sell(int ProdToSell){
+    soldProd = soldProd + ProdToSell;
+    TotalProd -= ProdToSell;
+    return supplies;
+  }
+
+
+
+}
