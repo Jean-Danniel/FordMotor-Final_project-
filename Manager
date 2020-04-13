@@ -1,0 +1,60 @@
+import java.util.*;
+
+public class Manager extends Personel{
+  private int Tasktrack= 0;
+  
+  public Manager(String NAME, int AGE, int ID, double WAGE, int HOURS, int DAYS){
+  super(NAME,AGE,ID,WAGE,HOURS,DAYS);
+  }
+  
+  public int getCompTask(Personel[] employees){
+    for(employee:employees){
+      TaskTrack+= employee.getTasks();
+    }
+    return TaskTrack
+  }
+  
+  //Checks whether an employee completed their tasks for the day
+  //Adds the employee to list if tasks not completed
+  public boolean isTasksCom(Personel[] employees){
+    int incomp = 0;
+    ArrayList<Personel> personelIncomp = new ArrayList<Personel>();
+    for(employee:employees){
+      //If at the end of a day's work, the number of tasks is
+      //above 0, then threshold is not passed
+      if(employee.getTasks != 0){
+        incomp++;
+        personelIncomp.add(employee);
+      }
+    }
+    
+    //Firing an employee
+    public Personel[] firing(Personel[] employees, Personel toFire){
+    //Transform array to ArrayList
+    //Removing toFire from the ArrayList
+    //Turn ArrayList back to Array
+    //return Array
+    }
+    
+    //Hiring an employee
+    public Personel[] hiring(Personel[] employees, Personel toHire){
+    //Transform array to ArrayList
+    //Adding toHire from a ArrayList of potential candidates
+    //Turn ArrayList back to Array
+    //return Array
+    
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+}
