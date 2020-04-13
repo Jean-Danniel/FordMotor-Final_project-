@@ -18,11 +18,12 @@ public class Simulation{
         moods.put(2,"Anxious");
         moods.put(3,"Fearful");
         moods.put(4,"Neutral");
-        moods.put(4,"Happy");
-        moods.put(5,"Excitted");
+        moods.put(5,"Happy");
+        moods.put(6,"Excitted");
 
         //Testing out the Map collection
         System.out.println(moods.get(4));
+        
 
     }
 }
