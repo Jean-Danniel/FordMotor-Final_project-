@@ -6,9 +6,7 @@ public class Personel{
     private int hours;
     private int days;
     private int tasks = 0;
-    private int mood = 3; //Might be changed to a map collections && Randomized 
-    private int energy = 2; //Randomized at first but later on change according to algorithm
-
+    private int completed_Tasks = 0;
 
     public Personel(){
         name = "George Lama";
@@ -18,8 +16,6 @@ public class Personel{
         hours = 7;
         days = 5;
         tasks = 0;
-        mood = 3;
-        energy = 2;
     }
     public Personel(String NAME, int AGE, int ID, double WAGE, int HOURS, int DAYS){
         name = NAME;
@@ -33,7 +29,7 @@ public class Personel{
     //Basci toString method
     public String toString(){
         String printing = " ";
-        printing = "This is " + name + " he is " + age + " his id number is " + id + " , he makes " + wage + " $ an hour" + " for " + hours + " hours and " + days + " days.";
+        printing = name + " is " + age + ", " + id + " is the corresponding id number." + " They make " + wage + " $ an hour" + " for " + hours + " hours and " + days + " days.";
         return printing; 
     }
     
@@ -61,10 +57,17 @@ public class Personel{
     public int getTasks(){
         return tasks;
     }
-
+    public int getCompTasks(){
+        return completed_Tasks;
+    }
 
     //The only ability of employee, completing a task
+    public void setTasks(int to_do){
+        tasks = tasks + to_do;
+    }
+    
     public void completeTask(int tcomplete){
         tasks = tasks - tcomplete;
+        completed_Tasks = completed_Tasks + tcomplete;
     }
 }
