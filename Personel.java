@@ -62,20 +62,6 @@ public class Personel{
         return tasks;
     }
 
-    //Basic set methods for private variables
-    public void setWage(double k){
-        wage = wage + k;
-    }
-    public void setTasks(int h){
-        tasks = tasks + h;
-    }
-    public void setMood(int j){
-        mood = j;
-    }
-    public void setEnergy(Map feeling){
-        System.out.println(name + " is feeling : " + feeling.get(mood) + " today");
-        energy = mood * 10;
-    }
 
     //The only ability of employee, completing a task
     public void completeTask(int tcomplete){
