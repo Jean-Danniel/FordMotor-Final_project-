@@ -1,39 +1,70 @@
+import java.util.*;
+
 public class Supervisor extends Manager{
-  //Sales of the company
-  private int CompSales = 0;
-  //Products sold by the company
-  private int soldProd = 0;
-  private int TotalProd = 0;
-  //Supplies of the company
-  private int supplies = 50;
-  private final int PriceperProd = 300;
-  
-  public Supervisor(String NAME, int AGE, int ID, double WAGE, int HOURS, int DAYS){
-  super(NAME,AGE,ID,WAGE,HOURS,DAYS);
-  }
-  
-  public int getCompSales(){
-    return CompSales;
-  }
-  
-  public int getSoldProd(){
-    return soldProd;
-  }
-  
-  //Buying supplies for the corporation
-  public int buy(int SuppToBuy){
-    supplies += SuppToBuy;
-    sales = sales - (PriceperProd * SuppToBuy)
-    return supplies;
-  }
-  
-  //Selling of products made by the compnay, selling will add to sales, and soldProd and subtract from TotalProd
-  public int sell(int ProdToSell){
-    soldProd = soldProd + ProdToSell;
-    TotalProd -= ProdToSell;
-    return supplies;
-  }
+    private int comp_sales = 0;
+    private int raw_goods;
+    private int finished_products = 0;
+    private final double price_per_prod = 500.00;
+    private final double price_per_raw = 90.00;
+    
+    
+    public Supervisor(String NAME, int AGE, int ID, double WAGE, int HOURS, int DAYS){
+        super(NAME,AGE,ID,WAGE,HOURS,DAYS);
+    }
 
+    //Getters
+    public int getSales(){
+        return this.comp_sales;
+    }
+    public int getRaw_goods(){
+        return this.raw_goods;
+    }
+    public int getFin_goods(){
+        return this.finished_products;
+    }
+    //Setters
+    //I don't think like we need a set Sales, instead
+    //it increments whenever a finished good is sold
+    
+    public void setFin_goods(int produces){
+        finished_products += produces;
+    }
+    //Selling finished goods method
+    public void sell(int num_selling){
+        finished_products = finished_products - num_selling; //Removing items that are to be sold from finished_products
+        int profit = (int) (num_selling * price_per_prod);
+        comp_sales = comp_sales + profit;
+        System.out.println("You have just sold " + num_selling + " products and made " + profit + " US dollars in profit");
+    }
+    //Buying raw goods
+    public void buying(int num_buying){
+        if((num_buying * price_per_raw) < comp_sales){
+            raw_goods = raw_goods + num_buying;
+            int spending = (int) (raw_goods * price_per_raw);
+            comp_sales = comp_sales - spending;
+            System.out.println("You have just bought " + num_buying + " materials and spent " + spending + " US dollars");
+        }else{
+            System.out.println("You are unable to afford this purchase!"); //Statement to alert user they cannot make such purchase
+        }
+    }
+    //Testing methods
+    public void setSales(int starting_money){
+        comp_sales = comp_sales + starting_money;
+    }
+    public void setRaw(int raw_materials){
+        raw_goods += raw_materials;
+    }
 
+    //Method works perfectly
+    public void taskToGoods(Personel employee){
+        int num = 0;
+        while(employee.getCompTasks() >= 4){
+            num++;
+            employee.setCompTasks(-4);
+        }
+        setFin_goods(num);
+        System.out.println(employee.getName() + " has created " + num + " finished goods, which brings the company total to " + finished_products);
+
+    }
 
 }
