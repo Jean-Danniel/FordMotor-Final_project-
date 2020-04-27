@@ -3,6 +3,8 @@ import java.util.*;
 public class Manager extends Personel{
     private int Tasktrack= 0;
     private int num_complete_task;
+    //I want to add private arraylists to each manager
+    //object
   
   public Manager(String NAME, int AGE, int ID, double WAGE, int HOURS, int DAYS){
   super(NAME,AGE,ID,WAGE,HOURS,DAYS);
@@ -15,42 +17,38 @@ public class Manager extends Personel{
       }
       return true;
   }
-  
-  //Checks whether an employee completed their tasks for the day
-  //Adds the employee to list if tasks not completed
-//   public boolean isTasksCom(Personel[] employees){
-//     int incomp = 0;
-//     ArrayList<Personel> personelIncomp = new ArrayList<Personel>();
-//     for(Personel employee:employees){
-//       //If at the end of a day's work, the number of tasks is
-//       //above 0, then threshold is not passed
-//       if(employee.getTasks != 0){
-//         incomp++;
-//         personelIncomp.add(employee);
-//       }
-//     }
-    
-    //Firing an employee
-    public Personel[] firing(ArrayList<Personel> employees, Personel toFire){
-    //Transform array to ArrayList
-    List<Personel> list = new List<Personel>();
-    Arrays.asList(employees);
 
-    //Removing toFire from the ArrayList
-    list.remove(toFire);
-    System.out.print("You have just fired: " + toFire.getName());
-    //Turn ArrayList back to Array
-    Personel[] new_team = list.toArray();
-    //return Array
-    return new_team;
+  //Display all team members...it works!
+  public void displayTeam(ArrayList<Personel> employees){
+    System.out.println("Here is the list of employees in " + this.getName() + "'s team: ");  
+    for(int i=1; i < employees.size(); i++){
+        System.out.println(employees.get(i).getName());
+      }
+  }
+  
+  //Displays people to hire...it works
+  public void displayOption(ArrayList<Personel> options){
+      System.out.println("Here is a list of possible employees: ");
+      for(int i = 0; i < options.size(); i++){
+          System.out.println(options.get(i).getName());
+      }
+  }
+    
+    //Firing an employee.... it works!
+    public void firing(ArrayList<Personel> employees, Personel toFire){
+        //Remove element from arrayList
+        employees.remove(toFire);
+        System.out.println("You have just removed: " + toFire.getName());
+
     }
     
-//     //Hiring an employee
-//     public Personel[] hiring(Personel[] employees, Personel toHire){
-//     //Transform array to ArrayList
-//     //Adding toHire from a ArrayList of potential candidates
-//     //Turn ArrayList back to Array
-//     //return Array
-//     }
+    //Hiring an employee
+    public void hiring(ArrayList<Personel> employees, ArrayList<Personel> options, Personel toHire){
+        //Add element from option
+        employees.add(toHire);
+        //Remove from previous list
+        options.remove(toHire);
+        System.out.println("You have just hired: " + toHire.getName());
+    }
        
 }
