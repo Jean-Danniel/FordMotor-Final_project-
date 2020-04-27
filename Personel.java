@@ -70,4 +70,7 @@ public class Personel{
         tasks = tasks - tcomplete;
         completed_Tasks = completed_Tasks + tcomplete;
     }
+    public void setCompTasks(int compTasks){
+        completed_Tasks = completed_Tasks + compTasks;
+    }
 }
