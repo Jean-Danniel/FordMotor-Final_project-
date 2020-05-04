@@ -73,4 +73,11 @@ public class Personel{
     public void setCompTasks(int compTasks){
         completed_Tasks = completed_Tasks + compTasks;
     }
+
+    //Salary method , new method
+    public double getSalary(){
+        double total_yearly = wage * hours * days * 52;
+        return total_yearly;
+    }
+
 }
