@@ -1,12 +1,15 @@
 import java.util.*;
+import java.io.*;
+import java.util.concurrent.TimeUnit;
 
 public class Supervisor extends Manager{
     private int comp_sales = 0;
     private int raw_goods;
     private int finished_products = 0;
     private final double price_per_prod = 500.00;
-    private final double price_per_raw = 90.00;
+    private final double price_per_raw = 100.00;
     
+    Scanner scnr = new Scanner(System.in);
     
     public Supervisor(String NAME, int AGE, int ID, double WAGE, int HOURS, int DAYS){
         super(NAME,AGE,ID,WAGE,HOURS,DAYS);
@@ -30,19 +33,28 @@ public class Supervisor extends Manager{
         finished_products += produces;
     }
     //Selling finished goods method
-    public void sell(int num_selling){
-        finished_products = finished_products - num_selling; //Removing items that are to be sold from finished_products
-        int profit = (int) (num_selling * price_per_prod);
-        comp_sales = comp_sales + profit;
-        System.out.println("You have just sold " + num_selling + " products and made " + profit + " US dollars in profit");
+    public void selling(){
+        System.out.println("You have chosen to sell your finished products" + "\n" + "The price per finished goods is " + price_per_prod + "\n" +"Input number of products desired to sell: ");
+        int num_selling = scnr.nextInt();    //Input from user       
+        if(num_selling <= finished_products){
+            finished_products = finished_products - num_selling; //Removing items that are to be sold from finished_products
+            int profit = (int) (num_selling * price_per_prod);
+            comp_sales = comp_sales + profit;
+            System.out.println("You have just sold " + num_selling + " products and made " + profit + " US dollars in profit" + " leaving your sales to be " + this.comp_sales);
+        }
+        else{
+            System.out.println("You cannot sell more than what you possess");
+        }
     }
-    //Buying raw goods
-    public void buying(int num_buying){
+        //Buying raw goods
+    public void buying(){
+        System.out.println("You have chosen to buy raw goods/materials" + "\nThe price per raw goods is " + price_per_raw + "\n" + "Input below number of raw goods desired: "); //Might change displaying options
+        int num_buying = scnr.nextInt();   //Input from the user
         if((num_buying * price_per_raw) < comp_sales){
             raw_goods = raw_goods + num_buying;
             int spending = (int) (raw_goods * price_per_raw);
             comp_sales = comp_sales - spending;
-            System.out.println("You have just bought " + num_buying + " materials and spent " + spending + " US dollars");
+            System.out.println("You have just bought " + num_buying + " materials and spent " + spending + " US dollars" + " leaving your sales to be " + this.comp_sales);
         }else{
             System.out.println("You are unable to afford this purchase!"); //Statement to alert user they cannot make such purchase
         }
@@ -56,14 +68,30 @@ public class Supervisor extends Manager{
     }
 
     //Method works perfectly
-    public void taskToGoods(Personel employee){
-        int num = 0;
-        while(employee.getCompTasks() >= 4){
-            num++;
-            employee.setCompTasks(-4);
+    public void taskToGoods(ArrayList<Personel> team){
+        //int num = 0;
+        // while(employee.getCompTasks() >= 4){
+        //     num++;
+        //     employee.setCompTasks(-4);
+        // }
+        System.out.print("\n");
+        System.out.println("For " + team.get(0).getName() + " 's team: ");
+        for(int i = 1; i < team.size();i++){
+            int num = 0;
+            while(team.get(i).getCompTasks() >= 4){
+                finished_products = finished_products + 4;
+                team.get(i).setCompTasks(-4);
+                num++;
+            }
+            System.out.println(team.get(i).getName() + " made " + num + " today" + "making the company total " + finished_products); 
+            
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
         }
-        setFin_goods(num);
-        System.out.println(employee.getName() + " has created " + num + " finished goods, which brings the company total to " + finished_products);
+        
 
     }
 
