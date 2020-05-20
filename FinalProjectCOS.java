@@ -13,6 +13,7 @@ public class FinalProjectCOS{
         Scanner actionscnr = new Scanner(actions);
         Scanner scnr = new Scanner(intro);
         Scanner input = new Scanner(System.in);
+        
 
         while(scnr.hasNextLine()){
             System.out.println(scnr.nextLine());
@@ -99,8 +100,8 @@ public class FinalProjectCOS{
         activity.put(2,"Sell");
         activity.put(3,"Hire");
         activity.put(4,"Fire");
-        activity.put(5,"TasktoGoods");
-        activity.put(6,"isTaskComplete");   //Not really necessary
+        // activity.put(5,"TasktoGoods");
+        //activity.put(6,"isTaskComplete");   //Not really necessary
         
         
         System.out.println("You have a total of 500000$ as a starting funds");
@@ -111,13 +112,15 @@ public class FinalProjectCOS{
             System.out.println(actionscnr.nextLine());  //Show as a file/GUI
         }
         
-        int status = 1;     //Numbers of run of the code, 3 times
-        int daily = 1;        //Number of actions in one day, probably 3 
+        int status = 3;     //Numbers of run of the code, 3 times
+        int daily = 3;        //Number of actions in one day, probably 3 
         int activities;
-        supervisor.setFin_goods(2);  //Testing..Testing..Testing
-        g1.get(1).setCompTasks(24);
         while(status > 0){
+            System.out.println("New DAy...");
+            daily = 3;
             while(daily > 0){
+                Random rand = new Random();
+
                 System.out.println("Input the action you desire to execute: ");
                 activities = input.nextInt();
                 if(activity.containsKey(activities)){
@@ -134,7 +137,6 @@ public class FinalProjectCOS{
                     supervisor.buying(); //Figure out what do when unable to do a purchase
                 }
                 if(activities == 2){
-                    System.out.println("You have " + supervisor.getFin_goods() + " finished goods");
                     supervisor.selling();
                 }
                 if(activities == 3){
@@ -143,24 +145,44 @@ public class FinalProjectCOS{
                 if(activities == 4){
                     supervisor.firing(g1, g2); //Method to be modified...Method modified + Completed
                 }
-                if(activities == 5){
-                    supervisor.taskToGoods(g1);  //Method to be modified...wording could be better
-                    supervisor.taskToGoods(g2);  //Method to be modified...wording could be better
-                    
-                }
-                if(activities == 6){
-                    for(int i = 1; i < g1.size(); i++){
-                        supervisor.isTasksComplete(g1.get(i)); //Method to be modified
-                    }
-                    for(int j = 1; j < g2.size(); j++){
-                        supervisor.isTasksComplete(g2.get(j));
-                    }
-                }
+                // if(activities == 5){
+                //     supervisor.taskToGoods(g1);  //Method to be modified...wording could be better
+                //     supervisor.taskToGoods(g2);  //Method to be modified...wording could be better    
+                // }
+                // if(activities == 6){
+                //     for(int i = 1; i < g1.size(); i++){
+                //         supervisor.isTasksComplete(g1.get(i)); //Method to be modified
+                //     }
+                //     for(int j = 1; j < g2.size(); j++){
+                //         supervisor.isTasksComplete(g2.get(j));
+                //     }
+                // }
                 //the randomization processes of employees
+                for(int i = 1; i < g1.size();  i++){
+                    int to_do = rand.nextInt(16); 
+                    g1.get(i).completeTask(to_do);  //for group 1
+                    g1.get(i).setCompTasks(to_do);  
+
+                }
+                //supervisor.taskToGoods(g1);  //Method to be modified...wording could be better
+                
+                for(int i = 1; i < g2.size(); i++){
+                    int to_do = rand.nextInt(16); 
+                    g2.get(i).completeTask(to_do); //for group 2
+                    g2.get(i).setCompTasks(to_do);
+                }
+                supervisor.taskToGoods(g1);  //Method to be modified...wording could be better
+                supervisor.taskToGoods(g2);  //Method to be modified...wording could be better    
                 daily--;
             }
+            System.out.println("DAy over...");
             status--;
         }
+        // for(int i = 1; i < g1.size(); i++){
+        //     System.out.println(g1.get(i).getTasks()); //it does work it is random
+        // }
+        System.out.println(supervisor.getRaw_goods());
+        
        
     }
 }
