@@ -1,3 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package better_final_project;
+
+/**
+ *
+ * @author Jean-Daniel
+ */
 import java.util.*;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
@@ -53,13 +64,13 @@ public class Supervisor extends Manager{
     public void buying(){
         System.out.println("You have "+ this.comp_sales+ "$ in sales" + "\nThe price per raw goods is " + price_per_raw + "\n" + "You have "+ this.raw_goods+ " raw goods/materials" +"\n" + "Input below number of raw goods desired: "); //Might change displaying options
         int num_buying = scnr.nextInt();   //Input from the user
-        if((num_buying * price_per_raw) < comp_sales){
+        if((num_buying * price_per_raw) <= comp_sales){
             raw_goods = raw_goods + num_buying;
-            int spending = (int) (raw_goods * price_per_raw);
+            int spending = (int) (num_buying * price_per_raw);
             comp_sales = comp_sales - spending;
             System.out.println("You have just bought " + num_buying + " materials and spent " + spending + " US dollars" + " leaving your sales to be " + this.comp_sales);
         }else{
-            System.out.println("You are unable to afford this purchase! \nPlease input a smaller value"); //Statement to alert user they cannot make such purchase
+            System.out.println("You are unable to afford this purchase! \nPlease input a valid value"); //Statement to alert user they cannot make such purchase
             //Recursive method to let them try again
             buying();
             
@@ -88,8 +99,7 @@ public class Supervisor extends Manager{
                 num += 4;
                 finished_products = finished_products + num;
                 team.get(i).setCompTasks(-4);
-                //Might add the thing that changes the raw goods
-                this.raw_goods = this.raw_goods - 1;
+                
                 
             }
             //System.out.println(team.get(i).getName() + " made " + num + " today" + "making the company total " + finished_products); 
@@ -105,3 +115,4 @@ public class Supervisor extends Manager{
     }
 
 }
+
